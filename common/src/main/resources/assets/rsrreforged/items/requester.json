@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "rsrreforged:block/requester_disconnected"
+  }
+}

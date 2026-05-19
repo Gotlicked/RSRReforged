@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": "refinedstorage:quartz_enriched_iron",
+    "C": "minecraft:crafting_table",
+    "R": "minecraft:redstone_torch",
+    "M": "refinedstorage:machine_casing",
+    "P": "refinedstorage:improved_processor"
+  },
+  "pattern": [
+    "ERE",
+    "CMC",
+    "EPE"
+  ],
+  "result": {
+    "id": "rsrreforged:crafting_emitter"
+  }
+}

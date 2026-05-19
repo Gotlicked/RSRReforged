@@ -1,0 +1,10 @@
+{
+  "block.rsrreforged.requester": "Requester",
+  "button.rsrreforged:requester.save": "Save",
+  "block.rsrreforged.crafting_emitter": "Crafting Emitter",
+  "block.rsrreforged.crafting_emitter.tooltip": "Emits a Redstone Signal when the specified amount of an item/fluid is being processed.",
+  "block.rsrreforged.requester.tooltip": "Keeps a specified amount of an item/fluid in stock.",
+  "block.rsrreforged.requester.tooltip.filter": "The resources that should be kept in stock in the storage network",
+  "block.rsrreforged.crafting_emitter.tooltip.filter": "The resources that should emit a redstone signal",
+  "creativetab.rsrreforged.rsrreforgedtab": "RSRequestify: Reforged"
+}

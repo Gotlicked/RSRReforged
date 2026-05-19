@@ -1,0 +1,7 @@
+{
+  "parent": "refinedstorage:block/detector/unpowered",
+  "textures": {
+    "torch": "rsrreforged:block/crafting_emitter/off",
+    "side": "rsrreforged:block/crafting_emitter/side"
+  }
+}

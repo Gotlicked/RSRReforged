@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key":{
+    "R": "minecraft:redstone",
+    "D": "refinedstorage:detector",
+    "C": "refinedstorage:autocrafter",
+    "F": "refinedstorage:machine_casing",
+    "P": "refinedstorage:advanced_processor"
+  },
+  "pattern": [
+    "RDR",
+    "CFC",
+    "RPR"
+  ],
+  "result": {
+    "id": "rsrreforged:requester"
+  }
+}

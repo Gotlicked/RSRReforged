@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=true": {
+      "model": "rsrreforged:block/crafting_emitter_on"
+    },
+    "powered=false": {
+      "model": "rsrreforged:block/crafting_emitter_off"
+    }
+  }
+}

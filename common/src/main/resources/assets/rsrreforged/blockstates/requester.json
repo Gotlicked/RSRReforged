@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "connected=true": {
+      "model": "rsrreforged:block/requester_connected"
+    },
+    "connected=false": {
+      "model": "rsrreforged:block/requester_disconnected"
+    }
+  }
+}
