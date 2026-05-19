@@ -28,6 +28,26 @@ repositories {
             includeGroupAndSubgroups("org.spongepowered")
         }
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri ("https://maven.creeperhost.net")
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("com.refinedmods")
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri ("https://maven.blamejared.com")
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("mezz.jei")
+        }
+    }
 }
 
 tasks.named<Jar>("sourcesJar") {
@@ -62,15 +82,26 @@ tasks.named<ProcessResources>("processResources") {
         "fabric_loader_version"         to findProperty("fabric_loader_version"),
         "mod_name"                      to findProperty("mod_name"),
         "mod_author"                    to findProperty("mod_author"),
+        "mod_credits"                   to findProperty("mod_credits"),
         "mod_id"                        to findProperty("mod_id"),
         "mod_logo_file"                 to findProperty("mod_logo_file"),
         "mod_license"                   to findProperty("mod_license"),
         "mod_description"               to findProperty("mod_description"),
+        "mod_display"                   to findProperty("mod_display"),
+        "mod_issue_tracker"             to findProperty("mod_issue_tracker"),
         "neoforge_version"              to findProperty("neoforge_version"),
         "neoforge_version_range"        to findProperty("neoforge_version_range"),
         "neoforge_loader_version_range" to findProperty("neoforge_loader_version_range"),
         "mod_credits"                   to findProperty("mod_credits"),
         "java_version"                  to findProperty("java_version"),
+        "rs_version"                    to findProperty("rs_version"),
+        "rs_version_range"              to findProperty("rs_version_range"),
+        "jei_version"                   to findProperty("jei_version"),
+        "jei_version_range"             to findProperty("jei_version_range"),
+        "modmenu_version"               to findProperty("modmenu_version"),
+        "modmenu_version_range"         to findProperty("modmenu_version_range"),
+        "rs_jei_integration_version"    to findProperty("rs_jei_integration_version"),
+        "cloth_config_version"          to findProperty("cloth_config_version"),
     )
     inputs.properties(replaceProperties)
     expand(replaceProperties)
@@ -90,7 +121,11 @@ neoForge {
 }
 
 dependencies {
+    compileOnly("com.refinedmods.refinedstorage:refinedstorage-common:${property("rs_version")}")
+    api("com.refinedmods.refinedstorage:refinedstorage-common-api:${property("rs_version")}")
     compileOnly("org.spongepowered:mixin:0.8.5")
+    api("mezz.jei:jei-${property("minecraft_version")}-common-api:${property("jei_version")}")
+    runtimeOnly("mezz.jei:jei-${property("minecraft_version")}-common:${property("jei_version")}")
 }
 
 configurations {

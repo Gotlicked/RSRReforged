@@ -18,6 +18,26 @@ java {
 
 repositories {
     mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri ("https://maven.creeperhost.net")
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("com.refinedmods")
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri ("https://maven.blamejared.com")
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("mezz.jei")
+        }
+    }
 }
 
 val commonJava: Configuration by configurations.creating
@@ -66,7 +86,9 @@ neoForge {
 }
 
 dependencies {
-    compileOnly(project(":common"))
+    runtimeOnly("com.refinedmods.refinedstorage:refinedstorage-neoforge:${property("rs_version")}")
+    runtimeOnly("mezz.jei:jei-${property("minecraft_version")}-neoforge:${property("jei_version")}")
+    api("mezz.jei:jei-${property("minecraft_version")}-neoforge-api:${property("jei_version")}")
     add("commonJava",      project(path = ":common", configuration = "commonJava"))
     add("commonResources", project(path = ":common", configuration = "commonResources"))
 }

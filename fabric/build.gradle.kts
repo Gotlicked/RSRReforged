@@ -29,6 +29,47 @@ repositories {
             includeGroupAndSubgroups("net.fabricmc")
         }
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri ("https://maven.creeperhost.net")
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("com.refinedmods")
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Terraformers"
+                url = uri ("https://maven.terraformersmc.com")
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("com.terraformersmc")
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri ("https://maven.blamejared.com")
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("mezz.jei")
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri ("https://maven.shedaniel.me")
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("me.shedaniel")
+        }
+    }
 }
 
 val commonJava: Configuration by configurations.creating
@@ -39,13 +80,17 @@ sourceSets.main {
 }
 
 dependencies {
-    compileOnly(project(":common"))
+    runtimeOnly("com.refinedmods.refinedstorage:refinedstorage-fabric:${property("rs_version")}")
+    runtimeOnly("me.shedaniel.cloth:cloth-config-fabric:${property("cloth_config_version")}")
+    api("mezz.jei:jei-${property("minecraft_version")}-fabric-api:${property("jei_version")}")
+    runtimeOnly("mezz.jei:jei-${property("minecraft_version")}-fabric:${property("jei_version")}")
+    runtimeOnly("com.terraformersmc:modmenu:${property("modmenu_version")}")
     add("commonJava",      project(path = ":common", configuration = "commonJava"))
     add("commonResources", project(path = ":common", configuration = "commonResources"))
 
     minecraft("com.mojang:minecraft:${property("minecraft_version")}")
     implementation("net.fabricmc:fabric-loader:${property("fabric_loader_version")}")
-    implementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
+    api("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
     implementation("net.fabricmc:fabric-language-kotlin:${property("fabric_language_kotlin_version")}")
 }
 
