@@ -28,9 +28,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
-
-import javax.annotation.Nullable;
 
 public class RequesterBlockEntity extends AbstractBaseNetworkNodeContainerBlockEntity<RequesterNetworkNode>
         implements NetworkNodeExtendedMenuProvider<RequesterData> {

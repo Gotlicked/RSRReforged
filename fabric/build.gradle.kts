@@ -18,6 +18,9 @@ java {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri ("https://mvnrepository.com/")
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -80,14 +83,15 @@ sourceSets.main {
 }
 
 dependencies {
-    runtimeOnly("com.refinedmods.refinedstorage:refinedstorage-fabric:${property("rs_version")}")
+    implementation("org.apiguardian:apiguardian-api:1.1.2")
+    implementation("com.refinedmods.refinedstorage:refinedstorage-fabric:${property("rs_version")}")
     runtimeOnly("me.shedaniel.cloth:cloth-config-fabric:${property("cloth_config_version")}")
     api("mezz.jei:jei-${property("minecraft_version")}-fabric-api:${property("jei_version")}")
     runtimeOnly("mezz.jei:jei-${property("minecraft_version")}-fabric:${property("jei_version")}")
     runtimeOnly("com.terraformersmc:modmenu:${property("modmenu_version")}")
     add("commonJava",      project(path = ":common", configuration = "commonJava"))
     add("commonResources", project(path = ":common", configuration = "commonResources"))
-
+    compileOnly(project(":common"))
     minecraft("com.mojang:minecraft:${property("minecraft_version")}")
     implementation("net.fabricmc:fabric-loader:${property("fabric_loader_version")}")
     api("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
@@ -121,7 +125,13 @@ tasks.named<JavaCompile>("compileJava") {
 tasks.named<ProcessResources>("processResources") {
     dependsOn(commonResources)
     from(commonResources)
-    expand(project.properties)
+    filesMatching(listOf(
+        "pack.mcmeta",
+        "fabric.mod.json",
+        "*.mixins.json",
+    )) {
+        expand(project.properties)
+    }
     from("src/main/templates")
 }
 

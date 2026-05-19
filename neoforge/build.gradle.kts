@@ -18,6 +18,9 @@ java {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri ("https://mvnrepository.com/")
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -68,7 +71,8 @@ neoForge {
             programArguments.addAll(
                 "--mod", "${property("mod_id")}", "--all", "--output",
                 file("src/generated/resources/").absolutePath,
-                "--existing", file("src/main/resources/").absolutePath,
+                "--existing", file("src/main/resources/assets").absolutePath,
+                "--existing", file("src/main/resources/data").absolutePath,
             )
         }
         create("server") {
@@ -86,11 +90,13 @@ neoForge {
 }
 
 dependencies {
-    runtimeOnly("com.refinedmods.refinedstorage:refinedstorage-neoforge:${property("rs_version")}")
+    implementation("org.apiguardian:apiguardian-api:1.1.2")
+    implementation("com.refinedmods.refinedstorage:refinedstorage-neoforge:${property("rs_version")}")
     runtimeOnly("mezz.jei:jei-${property("minecraft_version")}-neoforge:${property("jei_version")}")
     api("mezz.jei:jei-${property("minecraft_version")}-neoforge-api:${property("jei_version")}")
     add("commonJava",      project(path = ":common", configuration = "commonJava"))
     add("commonResources", project(path = ":common", configuration = "commonResources"))
+    compileOnly(project(":common"))
 }
 
 tasks.named<JavaCompile>("compileJava") {
@@ -101,7 +107,13 @@ tasks.named<JavaCompile>("compileJava") {
 tasks.named<ProcessResources>("processResources") {
     dependsOn(commonResources)
     from(commonResources)
-    expand(project.properties)
+    filesMatching(listOf(
+        "META-INF/neoforge.mods.toml",
+        "pack.mcmeta",
+        "*.mixins.json",
+    )) {
+        expand(project.properties)
+    }
     from("src/main/templates")
 }
 

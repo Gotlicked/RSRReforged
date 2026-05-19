@@ -1,6 +1,7 @@
 plugins {
     id("maven-publish")
     id("net.neoforged.moddev")
+    id("java-library")
 }
 
 base {
@@ -17,6 +18,9 @@ java {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri ("https://mvnrepository.com/")
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -56,9 +60,7 @@ tasks.named<Jar>("sourcesJar") {
     }
 }
 tasks.named<Jar>("jar") {
-    from(rootProject.file("LICENSE")) {
-        rename { "${it}_${findProperty("mod_name").toString()}" }
-    }
+    from(rootProject.file("LICENSE"))
     manifest {
         attributes(
             "Specification-Title"    to findProperty("mod_name").toString(),
@@ -104,7 +106,14 @@ tasks.named<ProcessResources>("processResources") {
         "cloth_config_version"          to findProperty("cloth_config_version"),
     )
     inputs.properties(replaceProperties)
-    expand(replaceProperties)
+    filesMatching(listOf(
+        ("neoforge.mods.toml"),
+        "pack.mcmeta",
+        "fabric.mod.json",
+        "*.mixins.json",
+    )) {
+        expand(replaceProperties)
+    }
     from("src/main/templates")
 }
 
@@ -121,10 +130,11 @@ neoForge {
 }
 
 dependencies {
-    compileOnly("com.refinedmods.refinedstorage:refinedstorage-common:${property("rs_version")}")
-    api("com.refinedmods.refinedstorage:refinedstorage-common-api:${property("rs_version")}")
+    implementation("org.apiguardian:apiguardian-api:1.1.2")
+    implementation("com.refinedmods.refinedstorage:refinedstorage-common:${property("rs_version")}")
+    implementation("com.refinedmods.refinedstorage:refinedstorage-common-api:${property("rs_version")}")
     compileOnly("org.spongepowered:mixin:0.8.5")
-    api("mezz.jei:jei-${property("minecraft_version")}-common-api:${property("jei_version")}")
+    runtimeOnly("mezz.jei:jei-${property("minecraft_version")}-common-api:${property("jei_version")}")
     runtimeOnly("mezz.jei:jei-${property("minecraft_version")}-common:${property("jei_version")}")
 }
 

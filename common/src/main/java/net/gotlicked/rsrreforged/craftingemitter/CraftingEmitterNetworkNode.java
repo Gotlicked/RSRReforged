@@ -6,8 +6,8 @@ import com.refinedmods.refinedstorage.api.network.impl.node.SimpleNetworkNode;
 import com.refinedmods.refinedstorage.api.network.impl.node.iface.InterfaceTransferResult;
 import com.refinedmods.refinedstorage.common.support.FilterWithFuzzyMode;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class CraftingEmitterNetworkNode extends SimpleNetworkNode {

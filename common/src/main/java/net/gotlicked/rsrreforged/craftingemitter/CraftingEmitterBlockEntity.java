@@ -24,9 +24,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
-
-import javax.annotation.Nullable;
 
 public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainerBlockEntity<CraftingEmitterNetworkNode>
         implements NetworkNodeExtendedMenuProvider<CraftingEmitterData> {
@@ -66,7 +66,7 @@ public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainer
         return filterContainer;
     }
 
-    @Override public void setLevel(@NonNull Level level) {
+    @Override public void setLevel(@NotNull Level level) {
         super.setLevel(level);
         this.mainNetworkNode.setLevel(level);
     }
@@ -84,8 +84,8 @@ public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainer
 
     @Nullable
     @Override public AbstractContainerMenu createMenu(
-            final int syncId, final @NonNull Inventory inventory,
-            final @NonNull Player player) {
+            final int syncId, final @NotNull Inventory inventory,
+            final @NotNull Player player) {
         return new CraftingEmitterContainerMenu(
                 syncId, player, this, filter.getFilterContainer(), getExportingIndicators());
     }

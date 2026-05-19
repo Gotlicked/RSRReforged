@@ -9,8 +9,7 @@ import com.refinedmods.refinedstorage.common.content.Items;
 import com.refinedmods.refinedstorage.common.support.FilterWithFuzzyMode;
 import com.refinedmods.refinedstorage.common.upgrade.UpgradeContainer;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class RequesterNetworkNode extends SimpleNetworkNode {
 
