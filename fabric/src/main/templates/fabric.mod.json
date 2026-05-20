@@ -1,45 +1,41 @@
 {
-    "schemaVersion": 1,
-    "id": "${mod_id}",
-    "version": "${mod_version}",
-    "name": "${mod_name}",
-    "description": "${mod_description}",
-    "authors": [
-        "${mod_author}"
-    ],
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_author}"
+  ],
   "contact": {
     "homepage": "${mod_display}",
     "issues": "${mod_issue_tracker}"
   },
-    "contributors": [
-      "${mod_credits}"
+  "contributors": [
+    "${mod_credits}"
+  ],
+  "license": "${mod_license}",
+  "icon": "${mod_logo_file}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "${mod_group_id}.RSRReforgedFabric"
     ],
-    "license": "${mod_license}",
-    "icon": "${mod_logo_file}",
-    "environment": "*",
-    "entrypoints": {
-      "main": [
-            "${mod_group_id}.RSRReforgedFabric"
-      ],
-      "client": [
-            "${mod_group_id}.RSRReforgedFabricClient"
-      ]
-    },
-    "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
-    ],
-    "depends": {
-        "fabricloader": ">=${fabric_loader_version}",
-        "fabric-api": "*",
-        "minecraft": "~${minecraft_version}",
-        "java": ">=${java_version}",
-        "refinedstorage": ">=${rs_version_range}",
-        "modmenu": ">=${modmenu_version_range}",
-        "cloth-config": ">=${cloth_config_version}"
-    },
-    "suggests": {
-      "jei": ">=${jei_version_range}",
-      "refinedstorage_jei_integration": ">=${rs_jei_integration_version}"
-    }
+    "client": [
+      "${mod_group_id}.RSRReforgedFabricClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=${java_version}",
+    "refinedstorage": ">=${rs_version_range}",
+    "modmenu": ">=${modmenu_version_range}",
+    "cloth-config": ">=${cloth_config_version}"
+  },
+  "suggests": {
+    "jei": ">=${jei_version_range}",
+    "refinedstorage_jei_integration": ">=${rs_jei_integration_version}"
+  }
 }

@@ -58,7 +58,7 @@ public class CraftingEmitterContainerMenu extends AbstractResourceContainerMenu 
     }
 
     private void addSlots(final Player player, final ResourceContainer exportConfig) {
-        for(
+        for (
                 int i = 0; i < exportConfig.size(); ++i) {
             addSlot(createExportConfigSlot(exportConfig, i));
         }
@@ -82,18 +82,21 @@ public class CraftingEmitterContainerMenu extends AbstractResourceContainerMenu 
         return indicators.size();
     }
 
-    @Override public void broadcastChanges() {
+    @Override
+    public void broadcastChanges() {
         super.broadcastChanges();
-        if(player instanceof ServerPlayer serverPlayer) {
+        if (player instanceof ServerPlayer serverPlayer) {
             indicators.detectChanges(serverPlayer);
         }
     }
 
-    @Override public boolean stillValid(final @NonNull Player player) {
+    @Override
+    public boolean stillValid(final @NonNull Player player) {
         return stillValid.test(player);
     }
 
-    @Override public void indicatorChanged(final int index, final @NonNull ExportingIndicator indicator) {
+    @Override
+    public void indicatorChanged(final int index, final @NonNull ExportingIndicator indicator) {
         indicators.set(index, indicator);
     }
 }

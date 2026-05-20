@@ -10,32 +10,30 @@ import java.util.function.Supplier;
 import static java.util.Objects.requireNonNull;
 
 public class BlockEntities {
-    private BlockEntities() {
-
-    }
-
     public static final BlockEntities INSTANCE = new BlockEntities();
-
     @Nullable
     private Supplier<BlockEntityType<RequesterBlockEntity>> requester;
-
     @Nullable
     private Supplier<BlockEntityType<CraftingEmitterBlockEntity>> craftingEmitter;
 
-    public void setRequester(final @Nullable Supplier<BlockEntityType<RequesterBlockEntity>> supplier) {
-        this.requester = supplier;
-    }
+    private BlockEntities() {
 
-    public void setCraftingEmitter(final @Nullable Supplier<BlockEntityType<CraftingEmitterBlockEntity>> supplier) {
-        this.craftingEmitter = supplier;
     }
 
     public BlockEntityType<RequesterBlockEntity> getRequester() {
         return requireNonNull(requester).get();
     }
 
+    public void setRequester(final @Nullable Supplier<BlockEntityType<RequesterBlockEntity>> supplier) {
+        this.requester = supplier;
+    }
+
     public BlockEntityType<CraftingEmitterBlockEntity> getCraftingEmitter() {
         return requireNonNull(craftingEmitter).get();
+    }
+
+    public void setCraftingEmitter(final @Nullable Supplier<BlockEntityType<CraftingEmitterBlockEntity>> supplier) {
+        this.craftingEmitter = supplier;
     }
 
 }

@@ -11,25 +11,24 @@ import static java.util.Objects.requireNonNull;
 
 public class Menus {
     public static final Menus INSTANCE = new Menus();
-    private Menus() {
-    }
-
     @Nullable
     private Supplier<MenuType<CraftingEmitterContainerMenu>> craftingEmitter;
-
     @Nullable
     private Supplier<MenuType<RequesterContainerMenu>> requester;
+
+    private Menus() {
+    }
 
     public MenuType<CraftingEmitterContainerMenu> getCraftingEmitter() {
         return requireNonNull(craftingEmitter).get();
     }
 
-    public MenuType<RequesterContainerMenu> getRequester() {
-        return requireNonNull(requester).get();
-    }
-
     public void setCraftingEmitter(final @Nullable Supplier<MenuType<CraftingEmitterContainerMenu>> supplier) {
         this.craftingEmitter = supplier;
+    }
+
+    public MenuType<RequesterContainerMenu> getRequester() {
+        return requireNonNull(requester).get();
     }
 
     public void setRequester(final @Nullable Supplier<MenuType<RequesterContainerMenu>> supplier) {

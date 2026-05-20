@@ -34,16 +34,18 @@ import org.jspecify.annotations.NonNull;
 public class RequesterBlockEntity extends AbstractBaseNetworkNodeContainerBlockEntity<RequesterNetworkNode>
         implements NetworkNodeExtendedMenuProvider<RequesterData> {
 
-    private static final int EXPORT_SLOTS = 9;
     public static final UpgradeDestination REQUESTER_DESTINATION = new UpgradeDestination() {
-        @Override public @NonNull Component getName() {
+        @Override
+        public @NonNull Component getName() {
             return Component.translatable("block.rsrreforged.requester");
         }
 
-        @Override public @NonNull ItemStack getStackRepresentation() {
+        @Override
+        public @NonNull ItemStack getStackRepresentation() {
             return new ItemStack(Items.INSTANCE.getRequester());
         }
     };
+    private static final int EXPORT_SLOTS = 9;
     private final FilterWithFuzzyMode filter;
     private final UpgradeContainer upgradeContainer;
 
@@ -68,7 +70,7 @@ public class RequesterBlockEntity extends AbstractBaseNetworkNodeContainerBlockE
     public static ResourceContainer createFilterContainer(final RequesterData interfaceData) {
         final ResourceContainer filterContainer = createFilterContainer();
         final ResourceContainerData resourceContainerData = interfaceData.filterContainerData();
-        for(
+        for (
                 int i = 0; i < resourceContainerData.resources().size(); ++i) {
             final int ii = i;
             resourceContainerData.resources().get(i).ifPresent(
@@ -78,13 +80,15 @@ public class RequesterBlockEntity extends AbstractBaseNetworkNodeContainerBlockE
         return filterContainer;
     }
 
-    @Override public void setLevel(@NonNull Level level) {
+    @Override
+    public void setLevel(@NonNull Level level) {
         super.setLevel(level);
         this.mainNetworkNode.setLevel(level);
     }
 
     @Nullable
-    @Override public AbstractContainerMenu createMenu(
+    @Override
+    public AbstractContainerMenu createMenu(
             final int syncId, final @NonNull Inventory inventory,
             final @NonNull Player player) {
         return new RequesterContainerMenu(
@@ -93,13 +97,15 @@ public class RequesterBlockEntity extends AbstractBaseNetworkNodeContainerBlockE
     }
 
 
-    @Override public @NonNull RequesterData getMenuData() {
+    @Override
+    public @NonNull RequesterData getMenuData() {
         return new RequesterData(
                 ResourceContainerData.of(filter.getFilterContainer()),
                 getExportingIndicators().getAll());
     }
 
-    @Override public @NonNull StreamEncoder<RegistryFriendlyByteBuf, RequesterData> getMenuCodec() {
+    @Override
+    public @NonNull StreamEncoder<RegistryFriendlyByteBuf, RequesterData> getMenuCodec() {
         return RequesterData.STREAM_CODEC;
     }
 
@@ -113,7 +119,7 @@ public class RequesterBlockEntity extends AbstractBaseNetworkNodeContainerBlockE
 
     private ExportingIndicator toExportingIndicator(
             @Nullable final InterfaceTransferResult result) {
-        return switch(result) {
+        return switch (result) {
             case STORAGE_DOES_NOT_ACCEPT_RESOURCE -> ExportingIndicator.DESTINATION_DOES_NOT_ACCEPT_RESOURCE;
             case RESOURCE_MISSING -> ExportingIndicator.RESOURCE_MISSING;
             case AUTOCRAFTING_STARTED -> ExportingIndicator.AUTOCRAFTING_WAS_STARTED;
@@ -122,11 +128,13 @@ public class RequesterBlockEntity extends AbstractBaseNetworkNodeContainerBlockE
         };
     }
 
-    @Override public @NonNull Component getName() {
+    @Override
+    public @NonNull Component getName() {
         return Component.translatable("block.rsrreforged.requester");
     }
 
-    @Override public boolean hasCustomName() {
+    @Override
+    public boolean hasCustomName() {
         return false;
     }
 
@@ -139,12 +147,14 @@ public class RequesterBlockEntity extends AbstractBaseNetworkNodeContainerBlockE
                 .build();
     }
 
-    @Override public void writeConfiguration(final @NonNull ValueOutput output) {
+    @Override
+    public void writeConfiguration(final @NonNull ValueOutput output) {
         super.writeConfiguration(output);
         filter.store(output);
     }
 
-    @Override public void readConfiguration(final @NonNull ValueInput input) {
+    @Override
+    public void readConfiguration(final @NonNull ValueInput input) {
         super.readConfiguration(input);
         filter.read(input);
     }

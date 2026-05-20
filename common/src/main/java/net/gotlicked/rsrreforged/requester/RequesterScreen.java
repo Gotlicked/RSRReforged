@@ -11,8 +11,9 @@ public class RequesterScreen extends AbstractFilterScreen<RequesterContainerMenu
         super(menu, playerInventory, title, true);
     }
 
-    @Override protected void extractTooltip(final @NonNull GuiGraphicsExtractor graphics, final int x, final int y) {
-        if(renderExportingIndicators(
+    @Override
+    protected void extractTooltip(final @NonNull GuiGraphicsExtractor graphics, final int x, final int y) {
+        if (renderExportingIndicators(
                 font, graphics, leftPos, topPos, x, y, getMenu().getIndicators(),
                 getMenu()::getIndicator)) {
             return;

@@ -40,19 +40,22 @@ public class RequesterBlock extends AbstractBaseBlock implements EntityBlock {
         return BlockEntities.INSTANCE.getRequester();
     }
 
-    @Override protected void createBlockStateDefinition(StateDefinition.@NonNull Builder<Block, BlockState> builder) {
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.@NonNull Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(CONNECTED);
     }
 
-    @Override public @Nullable <R extends BlockEntity> BlockEntityTicker<R> getTicker(
+    @Override
+    public @Nullable <R extends BlockEntity> BlockEntityTicker<R> getTicker(
             @NonNull Level level,
             @NonNull BlockState state,
             @NonNull BlockEntityType<R> entityType) {
         return TICKER.get(level, entityType);
     }
 
-    @Nullable public BlockEntity newBlockEntity(@NonNull BlockPos pos, @NonNull BlockState state) {
+    @Nullable
+    public BlockEntity newBlockEntity(@NonNull BlockPos pos, @NonNull BlockState state) {
         return new RequesterBlockEntity(pos, state);
     }
 

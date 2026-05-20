@@ -12,8 +12,9 @@ public class CraftingEmitterScreen extends AbstractFilterScreen<CraftingEmitterC
         super(menu, playerInventory, title, false);
     }
 
-    @Override protected void extractTooltip(final @NonNull GuiGraphicsExtractor graphics, final int x, final int y) {
-        if(renderExportingIndicators(
+    @Override
+    protected void extractTooltip(final @NonNull GuiGraphicsExtractor graphics, final int x, final int y) {
+        if (renderExportingIndicators(
                 font, graphics, leftPos, topPos, x, y, getMenu().getIndicators(),
                 getMenu()::getIndicator)) {
             return;

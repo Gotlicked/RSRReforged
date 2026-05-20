@@ -9,29 +9,29 @@ import java.util.function.Supplier;
 import static java.util.Objects.requireNonNull;
 
 public class Blocks {
-    private Blocks() {
-
-    }
-
+    public static final Blocks INSTANCE = new Blocks();
     @Nullable
     private Supplier<RequesterBlock> requester;
-
     @Nullable
     private Supplier<CraftingEmitterBlock> craftingEmitter;
 
-    public void setRequester(final @Nullable Supplier<RequesterBlock> requesterBlockSupplier) {
-        this.requester = requesterBlockSupplier;
-    }
+    private Blocks() {
 
-    public void setCraftingEmitter(final @Nullable Supplier<CraftingEmitterBlock> craftingEmitterBlockSupplier) {
-        this.craftingEmitter = craftingEmitterBlockSupplier;
     }
 
     public RequesterBlock getRequester() {
         return requireNonNull(requester).get();
     }
 
+    public void setRequester(final @Nullable Supplier<RequesterBlock> requesterBlockSupplier) {
+        this.requester = requesterBlockSupplier;
+    }
+
     public CraftingEmitterBlock getCraftingEmitter() {
         return requireNonNull(craftingEmitter).get();
+    }
+
+    public void setCraftingEmitter(final @Nullable Supplier<CraftingEmitterBlock> craftingEmitterBlockSupplier) {
+        this.craftingEmitter = craftingEmitterBlockSupplier;
     }
 }

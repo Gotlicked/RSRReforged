@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "key":{
+  "key": {
     "R": "minecraft:redstone",
     "D": "refinedstorage:detector",
     "C": "refinedstorage:autocrafter",

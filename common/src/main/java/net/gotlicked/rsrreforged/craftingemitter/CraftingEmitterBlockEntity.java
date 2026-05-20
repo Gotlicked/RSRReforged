@@ -24,8 +24,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
 public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainerBlockEntity<CraftingEmitterNetworkNode>
@@ -56,7 +56,7 @@ public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainer
     public static ResourceContainer createFilterContainer(final CraftingEmitterData interfaceData) {
         final ResourceContainer filterContainer = createFilterContainer();
         final ResourceContainerData resourceContainerData = interfaceData.filterContainerData();
-        for(
+        for (
                 int i = 0; i < resourceContainerData.resources().size(); ++i) {
             final int ii = i;
             resourceContainerData.resources().get(i).ifPresent(
@@ -66,13 +66,14 @@ public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainer
         return filterContainer;
     }
 
-    @Override public void setLevel(@NotNull Level level) {
+    @Override
+    public void setLevel(@NotNull Level level) {
         super.setLevel(level);
         this.mainNetworkNode.setLevel(level);
     }
 
     public void updatePower(boolean powered) {
-        if(this.shouldEmmitRedstone != powered) {
+        if (this.shouldEmmitRedstone != powered) {
             this.shouldEmmitRedstone = powered;
             assert this.level != null;
             this.level.setBlockAndUpdate(
@@ -83,7 +84,8 @@ public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainer
     }
 
     @Nullable
-    @Override public AbstractContainerMenu createMenu(
+    @Override
+    public AbstractContainerMenu createMenu(
             final int syncId, final @NotNull Inventory inventory,
             final @NotNull Player player) {
         return new CraftingEmitterContainerMenu(
@@ -91,14 +93,16 @@ public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainer
     }
 
 
-    @Override public @NonNull CraftingEmitterData getMenuData() {
+    @Override
+    public @NonNull CraftingEmitterData getMenuData() {
         return new CraftingEmitterData(
                 ResourceContainerData.of(
                         filter.getFilterContainer()),
                 getExportingIndicators().getAll());
     }
 
-    @Override public @NonNull StreamEncoder<RegistryFriendlyByteBuf, CraftingEmitterData> getMenuCodec() {
+    @Override
+    public @NonNull StreamEncoder<RegistryFriendlyByteBuf, CraftingEmitterData> getMenuCodec() {
         return CraftingEmitterData.STREAM_CODEC;
     }
 
@@ -111,7 +115,7 @@ public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainer
 
     private ExportingIndicator toExportingIndicator(
             @Nullable final InterfaceTransferResult result) {
-        return switch(result) {
+        return switch (result) {
             case STORAGE_DOES_NOT_ACCEPT_RESOURCE -> ExportingIndicator.DESTINATION_DOES_NOT_ACCEPT_RESOURCE;
             case RESOURCE_MISSING -> ExportingIndicator.RESOURCE_MISSING;
             case AUTOCRAFTING_STARTED -> ExportingIndicator.AUTOCRAFTING_WAS_STARTED;
@@ -120,27 +124,32 @@ public class CraftingEmitterBlockEntity extends AbstractBaseNetworkNodeContainer
         };
     }
 
-    @Override public @NonNull Component getName() {
+    @Override
+    public @NonNull Component getName() {
         return Component.translatable("block.rsrreforged.crafting_emitter");
     }
 
-    @Override public boolean hasCustomName() {
+    @Override
+    public boolean hasCustomName() {
         return false;
     }
 
-    @Override protected @NonNull InWorldNetworkNodeContainer createMainContainer(
+    @Override
+    protected @NonNull InWorldNetworkNodeContainer createMainContainer(
             @NonNull CraftingEmitterNetworkNode networkNode) {
         return RefinedStorageApi.INSTANCE.createNetworkNodeContainer(
                 this, networkNode).connectionStrategy(
                 new SimpleConnectionStrategy(getBlockPos())).build();
     }
 
-    @Override public void writeConfiguration(final @NonNull ValueOutput output) {
+    @Override
+    public void writeConfiguration(final @NonNull ValueOutput output) {
         super.writeConfiguration(output);
         filter.store(output);
     }
 
-    @Override public void readConfiguration(final @NonNull ValueInput input) {
+    @Override
+    public void readConfiguration(final @NonNull ValueInput input) {
         super.readConfiguration(input);
         filter.read(input);
     }
